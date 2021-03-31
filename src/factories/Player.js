@@ -26,7 +26,7 @@ const Player = (name) => {
     // For computer player only
     const randomShot = () => {
         let cell = Math.floor(Math.random() * 100);
-        while(!isValidShot(cell)) cell = Math.floor(Math.random() * 100);
+        while (!isValidShot(cell)) cell = Math.floor(Math.random() * 100);
         return cell;
     };
 
