@@ -3,6 +3,10 @@ const Ship = (name, length) => {
     /** Cells occupied by the ship on a GameBoard */
     let positions = [];
 
+    const getPositions = () => {
+        return positions;
+    };
+
     const addPosition = (cell) => {
         positions.push({
             cell: cell,
@@ -41,6 +45,7 @@ const Ship = (name, length) => {
     return {
         name,
         length,
+        getPositions,
         addPosition,
         hasPosition,
         hit,
