@@ -12,22 +12,26 @@ const Player = (name) => {
          * If the function is called without a cell position
          * means that is Computer's turn, so run a randomShoot
          */
-        if (result === null) result = randomShoot();
+        if (result === null) result = randomShot();
 
-        if (shotsHistory.includes(result) ||
-            result < 1 ||
-            result > 100) {
-            result = null;
-        } else {
+        if (isValidShot(result)) {
             shotsHistory.push(cell);
+        } else {
+            result = null;
         }
 
         return result;
     };
 
     // For computer player only
-    const randomShoot = () => {
-        return Math.random() * (100 - 1) + 1;
+    const randomShot = () => {
+        let cell = Math.floor(Math.random() * 100);
+        while(!isValidShot(cell)) cell = Math.floor(Math.random() * 100);
+        return cell;
+    };
+
+    const isValidShot = (cell) => {
+        return (!shotsHistory.includes(cell) && cell >= 0 && cell < 100);
     };
 
     return { name, shoot };
