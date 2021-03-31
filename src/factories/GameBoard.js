@@ -43,7 +43,7 @@ const GameBoard = () => {
          * Check if there is a ship already occuping
          * any cell from place array
          */
-        if(place.length > 0 && placeIsOccuped(place)) {
+        if (place.length > 0 && placeIsOccuped(place)) {
             place = [];
         }
 
@@ -87,8 +87,8 @@ const GameBoard = () => {
     const placeIsOccuped = (place) => {
         let result = false;
 
-        for(let cell of place) {
-            if(ships.some(s => s.hasPosition(cell))) {
+        for (let cell of place) {
+            if (ships.some(s => s.hasPosition(cell))) {
                 result = true;
                 break;
             }
@@ -97,12 +97,37 @@ const GameBoard = () => {
         return result;
     };
 
+    /**
+     * Receive an array of ships, and places them
+     * on the board randomly.
+     */
+    const placeShipsRandomly = (shipsArr) => {
+        shipsArr.forEach(ship => {
+            let place = [];
+            while (place.length === 0) {
+                const axis = Math.floor(Math.random() * 2) ? 'X' : 'Y';
+                const cell = Math.floor(Math.random() * 100);
+                place = getPlace(cell, axis, ship);
+            }
+            addShip(place, ship);
+        });
+    };
+
+    const receiveAttack = (cell) => {
+        board[cell] = true;
+        const ship = ships.find(ship => ship.hasPosition(cell));
+        if (ship) ship.hit(cell);
+    };
+
+
     return {
         init,
         getBoard,
         getShips,
         getPlace,
         addShip,
+        placeShipsRandomly,
+        receiveAttack,
     };
 };
 
