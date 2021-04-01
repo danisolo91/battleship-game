@@ -4,7 +4,7 @@ let player = Player('Daniel');
 
 describe('Player factory tests', () => {
     test('create a new Player', () => {
-        expect(player).toEqual({ name: 'Daniel', shoot: expect.any(Function) });
+        expect(player).toEqual({ nickname: 'Daniel', shoot: expect.any(Function) });
     });
 
     test('shoot empty cell, returns cell', () => {
