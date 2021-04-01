@@ -1,4 +1,4 @@
-const Player = (name) => {
+const Player = (nickname) => {
     let shotsHistory = [];
 
     /**
@@ -15,7 +15,7 @@ const Player = (name) => {
         if (result === null) result = randomShot();
 
         if (isValidShot(result)) {
-            shotsHistory.push(cell);
+            shotsHistory.push(result);
         } else {
             result = null;
         }
@@ -34,7 +34,9 @@ const Player = (name) => {
         return (!shotsHistory.includes(cell) && cell >= 0 && cell < 100);
     };
 
-    return { name, shoot };
+    const clearShotsHistory = () => shotsHistory = [];
+
+    return { nickname, clearShotsHistory, shoot };
 };
 
 export default Player;
