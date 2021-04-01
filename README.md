@@ -2,4 +2,4 @@
 
 This is my Battleship Game made with React and Jest (for unit tests), for TheOdinProject curriculum.
 
-... project under construction ...
+Live demo: https://danisolo91.github.io/battleship-game/
