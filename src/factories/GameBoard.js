@@ -21,7 +21,10 @@ const GameBoard = () => {
     };
 
     const addShip = (place, ship) => {
-        place.forEach(cell => ship.addPosition(cell));
+        place.forEach(cell => {
+            ship.addPosition(cell);
+            board[cell] = 's';
+        });
         ships.push(ship);
     };
 
@@ -114,9 +117,19 @@ const GameBoard = () => {
     };
 
     const receiveAttack = (cell) => {
-        board[cell] = true;
+        if(board[cell] === false) {
+            board[cell] = true;
+        } else if(board[cell] === 's') {
+            board[cell] = 'sh';
+        }
+
         const ship = ships.find(ship => ship.hasPosition(cell));
         if (ship) ship.hit(cell);
+    };
+
+    const hasLost = () => {
+        const result = ships.filter(ship => ship.isSunk());
+        return (result.length === 5);
     };
 
 
@@ -128,6 +141,7 @@ const GameBoard = () => {
         addShip,
         placeShipsRandomly,
         receiveAttack,
+        hasLost,
     };
 };
 
